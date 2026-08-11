@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TPRM Must Change for the AI Era | Building Trust in the AI Era</title>
+<meta name="description" content="Third-Party Risk Management was built on trusting the vendor. In the AI era, the implementation — not the vendor — becomes the unit of trust. By Amiel Attias.">
+
+<!-- SEO / Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="TPRM Must Change for the AI Era">
+<meta property="og:description" content="The implementation becomes the unit of trust. A new framework for evaluating AI risk in the enterprise.">
+<meta property="og:site_name" content="Building Trust in the AI Era">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TPRM Must Change for the AI Era">
+<meta name="twitter:description" content="Third-Party Risk Management was built on trusting the vendor. In the AI era, the implementation becomes the unit of trust.">
+<link rel="canonical" href="https://example.com/editorials/tprm-must-change-for-the-ai-era">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "TPRM Must Change for the AI Era",
+  "author": { "@type": "Person", "name": "Amiel Attias" },
+  "publisher": { "@type": "Organization", "name": "Building Trust in the AI Era" },
+  "description": "Third-Party Risk Management was built on trusting the vendor. In the AI era, the implementation becomes the unit of trust.",
+  "articleSection": "AI Governance",
+  "inLanguage": "en"
+}
+</script>
+
+<!-- Theme applied before paint to avoid flash -->
+<script>
+  (function () {
+    var saved = null;
+    try { saved = window.__theme || null; } catch (e) {}
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   BUILDING TRUST IN THE AI ERA — DESIGN SYSTEM TOKENS
+   ========================================================================== */
+:root {
+  /* Light theme */
+  --ink: #0A0A0A;
+  --paper: #FFFFFF;
+  --graphite: #6B6F76;
+  --hairline: #E4E5E7;
+  --mist: #F7F8F9;
+
+  /* Signature accent — no longer a single static hex.
+     The signal interpolates between a cold, structural blue (vendor-centric,
+     fixed, rule-bound) and a warm ember (context-centric, adaptive, human).
+     This *is* the essay's argument, expressed as color, not decoration. */
+  --signal-cold: #33469C;
+  --signal-warm: #E07A3F;
+  --signal: var(--signal-cold);
+
+  /* Spacing (8px base unit) */
+  --sp-1: 8px;  --sp-2: 16px; --sp-3: 24px; --sp-4: 32px;
+  --sp-6: 48px; --sp-8: 64px; --sp-12: 96px;
+
+  --measure: 680px;
+  --wide: 900px;
+  --radius: 4px;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-theme="dark"] {
+  --ink: #F2F2F3;
+  --paper: #0B0C0E;
+  --graphite: #9A9EA6;
+  --hairline: #232529;
+  --mist: #16181B;
+  --signal-cold: #6D82E0;
+  --signal-warm: #F0995C;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { color-scheme: light dark; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+
+a { color: var(--signal); }
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--signal-cold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: var(--paper);
+  padding: 12px 20px; z-index: 200; border-radius: 0 0 4px 0;
+}
+.skip-link:focus { left: 0; }
+
+/* ==========================================================================
+   READING PROGRESS BAR
+   ========================================================================== */
+.progress-track {
+  position: fixed; top: 0; left: 0; width: 100%; height: 3px;
+  background: transparent; z-index: 150;
+}
+.progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--signal-cold), var(--signal-warm));
+  transform-origin: left;
+}
+
+/* ==========================================================================
+   HEADER — persistent, minimal, axis-mark as wordmark
+   ========================================================================== */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--hairline);
+}
+.site-header .inner {
+  max-width: var(--wide); margin: 0 auto;
+  padding-top: var(--sp-2); padding-bottom: var(--sp-2);
+  padding-left: max(clamp(24px, 8vw, 48px), env(safe-area-inset-left));
+  padding-right: max(clamp(24px, 8vw, 48px), env(safe-area-inset-right));
+  display: flex; align-items: center; justify-content: space-between;
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.brand-mark { width: 28px; height: 2px; background: var(--hairline); position: relative; border-radius: 2px; }
+.brand-mark::after {
+  content: ""; position: absolute; top: 50%; left: 30%;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--signal-cold); transform: translate(-50%, -50%);
+}
+.brand-name { font-size: 13px; font-weight: 600; letter-spacing: -0.01em; }
+
+.header-actions { display: flex; align-items: center; gap: var(--sp-1); }
+.icon-btn {
+  background: none; border: 1px solid var(--hairline); color: var(--ink);
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 15px;
+  transition: border-color 0.2s var(--ease);
+}
+.icon-btn:hover { border-color: var(--signal-cold); }
+
+/* ==========================================================================
+   TYPOGRAPHY SCALE
+   ========================================================================== */
+.eyebrow {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--signal-cold);
+}
+h1.display {
+  font-size: clamp(36px, 6.5vw, 72px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05;
+}
+h2.heading-l { font-size: clamp(24px, 3.6vw, 34px); font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+h3.heading-m { font-size: clamp(19px, 2.6vw, 24px); font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+p.lead { font-size: clamp(17px, 2.2vw, 19px); line-height: 1.6; }
+p, .body { font-size: 17px; line-height: 1.65; color: var(--ink); }
+.utility { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--graphite); }
+.graphite { color: var(--graphite); }
+
+/* ==========================================================================
+   LAYOUT PRIMITIVES
+   ========================================================================== */
+.container {
+  max-width: var(--measure); margin: 0 auto;
+  padding-left: max(clamp(24px, 8vw, 48px), env(safe-area-inset-left));
+  padding-right: max(clamp(24px, 8vw, 48px), env(safe-area-inset-right));
+}
+.container-wide {
+  max-width: var(--wide); margin: 0 auto;
+  padding-left: max(clamp(24px, 8vw, 48px), env(safe-area-inset-left));
+  padding-right: max(clamp(24px, 8vw, 48px), env(safe-area-inset-right));
+}
+section.beat { padding-top: var(--sp-12); }
+section.beat:first-of-type { padding-top: var(--sp-8); }
+.section-heading { margin-bottom: var(--sp-4); }
+.section-heading .eyebrow { margin-bottom: var(--sp-1); display: block; }
+.section-heading p.dek { margin-top: var(--sp-2); max-width: 60ch; }
+
+@media (max-width: 640px) {
+  section.beat { padding-top: var(--sp-8); }
+  .section-heading { margin-bottom: var(--sp-3); }
+}
+
+/* ==========================================================================
+   COVER
+   ========================================================================== */
+.cover { padding: var(--sp-8) 0 var(--sp-8); }
+.cover .dek { margin-top: var(--sp-3); font-size: 19px; color: var(--graphite); max-width: 56ch; }
+.cover .axis-wrap { margin: var(--sp-6) 0 var(--sp-4); }
+.cover-meta {
+  border-top: 1px solid var(--hairline); padding-top: var(--sp-3);
+  display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--sp-1);
+}
+.cover-meta .headline { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.cover-meta .byline { font-size: 13px; color: var(--graphite); }
+
+/* ==========================================================================
+   AXIS — the signature element. Scroll-driven, not a fixed 3-beat graphic.
+   ========================================================================== */
+.axis-line { position: relative; height: 1px; background: var(--hairline); width: 100%; margin-bottom: 10px; }
+.axis-marker {
+  position: absolute; top: 50%; left: var(--axis-pos, 4%);
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--axis-color, var(--signal-cold));
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--axis-color, var(--signal-cold)) 15%, transparent);
+}
+.axis-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: 500; color: var(--graphite); }
+.axis-caption { margin-top: var(--sp-2); font-size: 14px; color: var(--graphite); font-style: normal; }
+
+/* ==========================================================================
+   EXECUTIVE SUMMARY
+   ========================================================================== */
+.exec-summary {
+  border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+  padding: var(--sp-4) 0; margin: var(--sp-8) 0;
+}
+.exec-summary .utility { display: block; margin-bottom: var(--sp-2); }
+.exec-summary p { font-size: 18px; line-height: 1.6; }
+
+/* ==========================================================================
+   QUOTES — two tiers only
+   ========================================================================== */
+.quote-tier1 {
+  background: var(--mist); border-radius: var(--radius);
+  padding: var(--sp-6) var(--sp-4); text-align: center; margin: var(--sp-8) 0;
+}
+.quote-tier1 p {
+  font-size: clamp(24px, 3.6vw, 34px); font-weight: 700; letter-spacing: -0.015em; line-height: 1.25;
+  max-width: 620px; margin: 0 auto;
+}
+.quote-tier1 .attribution { margin-top: var(--sp-2); }
+
+.quote-tier2 {
+  border-left: 2px solid var(--signal-cold); padding-left: var(--sp-2);
+  font-weight: 600; margin: var(--sp-3) 0;
+}
+
+/* ==========================================================================
+   CALLOUT — one type only
+   ========================================================================== */
+.callout {
+  border-left: 2px solid var(--hairline); padding: var(--sp-2) 0 var(--sp-2) var(--sp-2);
+  margin: var(--sp-3) 0;
+}
+.callout .utility { display: block; margin-bottom: 6px; }
+.callout p { font-size: 15px; color: var(--graphite); }
+
+/* ==========================================================================
+   FRAMEWORK TABLE
+   ========================================================================== */
+.framework-table { border-top: 1px solid var(--hairline); margin-top: var(--sp-4); }
+.framework-row {
+  display: grid; grid-template-columns: 220px 1fr; gap: var(--sp-3);
+  padding: var(--sp-2) 0; border-bottom: 1px solid var(--hairline); align-items: baseline;
+}
+.framework-row.active {
+  background: var(--mist); margin: 0 calc(var(--sp-3) * -1); padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius); border-bottom: 1px solid var(--hairline);
+}
+.framework-row .dim { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--graphite); }
+.framework-row.active .dim { color: var(--signal-cold); }
+.framework-row .question { font-size: 17px; font-weight: 500; letter-spacing: -0.005em; }
+.framework-footer { margin-top: var(--sp-3); font-size: 15px; color: var(--graphite); line-height: 1.6; max-width: 60ch; }
+.framework-footer strong { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 640px) {
+  .framework-row { grid-template-columns: 1fr; gap: 6px; }
+  .framework-row.active { margin: 0; }
+}
+
+/* ==========================================================================
+   BODY CONTENT RHYTHM
+   ========================================================================== */
+.prose > * + * { margin-top: var(--sp-3); }
+.prose ul { padding-left: 1.2em; }
+.prose li + li { margin-top: 8px; }
+
+/* ==========================================================================
+   QUESTIONS FOR LEADERS
+   ========================================================================== */
+.questions-list { list-style: none; counter-reset: q; }
+.questions-list li {
+  counter-increment: q; position: relative; padding-left: 44px;
+  font-size: clamp(18px, 2.4vw, 22px); font-weight: 600; letter-spacing: -0.01em;
+}
+.questions-list li + li { margin-top: var(--sp-4); }
+.questions-list li::before {
+  content: counter(q); position: absolute; left: 0; top: 0;
+  font-size: 13px; font-weight: 500; color: var(--signal-cold);
+  border: 1px solid var(--hairline); width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ==========================================================================
+   AUTHOR BIO / FOOTER
+   ========================================================================== */
+.author-bio { border-top: 1px solid var(--hairline); padding-top: var(--sp-4); }
+.author-bio .name { font-size: 20px; font-weight: 600; }
+.author-bio .cred { font-size: 15px; color: var(--graphite); margin-top: 4px; }
+.author-bio .disclaimer { font-size: 12px; color: var(--graphite); margin-top: var(--sp-2); max-width: 60ch; }
+
+.page-footer {
+  margin-top: var(--sp-12); border-top: 1px solid var(--hairline);
+  padding: var(--sp-4) 0 var(--sp-8);
+}
+.footer-actions { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+.btn {
+  font: inherit; font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+  border: 1px solid var(--hairline); background: transparent; color: var(--ink);
+  padding: 10px 16px; border-radius: 20px; cursor: pointer;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+.btn:hover { border-color: var(--signal-cold); }
+
+/* ==========================================================================
+   SEARCH (Cmd/Ctrl+K) — architected to scale to a multi-article index
+   ========================================================================== */
+.search-overlay {
+  position: fixed; inset: 0; background: color-mix(in srgb, var(--ink) 40%, transparent);
+  display: none; align-items: flex-start; justify-content: center; padding-top: 12vh; z-index: 200;
+}
+.search-overlay.open { display: flex; }
+.search-panel {
+  background: var(--paper); border: 1px solid var(--hairline); border-radius: 10px;
+  width: min(560px, 90vw); max-height: 60vh; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  display: flex; flex-direction: column;
+}
+.search-input {
+  font: inherit; font-size: 16px; border: none; border-bottom: 1px solid var(--hairline);
+  padding: var(--sp-2) var(--sp-3); background: transparent; color: var(--ink); width: 100%;
+}
+.search-input:focus { outline: none; }
+.search-results { overflow-y: auto; padding: var(--sp-1); }
+.search-result {
+  display: block; width: 100%; text-align: left; background: none; border: none;
+  padding: 10px 12px; border-radius: 6px; cursor: pointer; color: var(--ink); font: inherit; font-size: 14px;
+}
+.search-result:hover, .search-result.active { background: var(--mist); }
+.search-result .r-section { font-size: 11px; color: var(--graphite); text-transform: uppercase; letter-spacing: 0.06em; }
+.search-empty { padding: var(--sp-3); color: var(--graphite); font-size: 14px; }
+
+/* ==========================================================================
+   REVEAL ANIMATION — one orchestrated moment, not scattered effects
+   ========================================================================== */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* ==========================================================================
+   PRINT / PDF EXPORT
+   ========================================================================== */
+@media print {
+  .site-header, .progress-track, .search-overlay, .page-footer .footer-actions, .no-print { display: none !important; }
+  body { color: #0A0A0A; background: #fff; }
+  a { color: inherit; text-decoration: none; }
+  .quote-tier1 { background: #F7F8F9; }
+  .framework-row.active { background: #F7F8F9; }
+  section.beat { padding-top: 32px; }
+  .container, .container-wide { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to article</a>
+
+<div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="#top" aria-label="Building Trust in the AI Era — home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Building Trust in the AI Era</span>
+    </a>
+    <div class="header-actions">
+      <button class="icon-btn" id="searchBtn" aria-label="Search (Ctrl+K)" title="Search (Ctrl+K)">⌕</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+    </div>
+  </div>
+</header>
+
+<!-- Search overlay -->
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search this article">
+  <div class="search-panel">
+    <input class="search-input" id="searchInput" type="text" placeholder="Search this article… (Esc to close)" aria-label="Search">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============================== COVER ============================== -->
+  <section class="cover container" id="top">
+    <h1 class="display">TPRM Must Change<br>for the AI Era</h1>
+    <p class="dek">Trust the vendor, reduce the risk — that assumption built Third-Party Risk Management for the software era. It no longer holds.</p>
+
+    <div class="axis-wrap">
+      <div class="axis-line"><div class="axis-marker" id="axisMarker"></div></div>
+      <div class="axis-labels"><span>Vendor-centric</span><span>Context-centric</span></div>
+    </div>
+
+    <div class="cover-meta">
+      <div class="headline">TPRM Must Change for the AI Era</div>
+      <div class="byline">By Amiel Attias</div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- ========================= EXECUTIVE SUMMARY ========================= -->
+    <section class="exec-summary reveal" data-section="Executive Summary" id="exec-summary">
+      <span class="utility">In Brief</span>
+      <p>For decades, Third-Party Risk Management assumed that trusting the vendor reduced the risk. AI breaks that assumption: the same platform can be deployed to summarize public content or connected to proprietary code and privileged systems — same vendor, radically different risk. The implementation, not the vendor, is now the real unit of trust. This piece introduces the Contextual Trust Framework, five questions that replace a single vendor risk score, and argues that trust must be evaluated continuously rather than assessed once and left alone.</p>
+    </section>
+
+    <!-- ========================= PROBLEM STATEMENT ========================= -->
+    <section class="beat reveal" data-section="The Business Problem Isn't AI" id="problem">
+      <div class="section-heading">
+        <span class="eyebrow">The Business Problem Isn't AI</span>
+        <h2 class="heading-l">Security was built to move in weeks. AI moves in days.</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">Every executive faces the same tension: the business wants AI deployed in days, while security was designed to evaluate technology over weeks. That gap is quickly becoming one of the biggest operational risks facing modern enterprises.</p>
+        <p>The challenge isn't simply approving AI faster. It's enabling innovation without losing confidence in how technology is adopted. That means changing the question itself — not <em>"Is this vendor secure?"</em> but <em>"Can we trust this implementation?"</em> That is a fundamentally different question, and it demands a fundamentally different operating model.</p>
+      </div>
+    </section>
+
+    <!-- ========================= NEW MENTAL MODEL ========================= -->
+    <section class="beat reveal" data-section="The Unit of Trust Has Changed" id="mental-model">
+      <div class="section-heading">
+        <span class="eyebrow">The Unit of Trust Has Changed</span>
+        <h2 class="heading-l">Traditional TPRM treats the vendor as the unit of analysis. That no longer reflects how organizations consume AI.</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">Risk is no longer determined primarily by who provides the technology. It emerges from the relationship between the technology and the business using it. The same vendor may represent minimal risk in one implementation and critical risk in another — not because the vendor changed, but because everything around it did.</p>
+      </div>
+    </section>
+
+    <div class="quote-tier1 reveal">
+      <p>The implementation becomes the unit of trust.</p>
+      <div class="attribution utility">The Unit of Trust Has Changed</div>
+    </div>
+
+    <!-- ============================ FRAMEWORK ============================ -->
+    <section class="beat reveal" data-section="The Contextual Trust Framework" id="framework">
+      <div class="axis-wrap">
+        <div class="axis-line"><div class="axis-marker" style="left:var(--axis-pos, 50%); background:var(--axis-color, var(--signal-cold));"></div></div>
+        <div class="axis-labels"><span>Vendor-centric</span><span>Context-centric</span></div>
+        <p class="axis-caption" id="axisCaption">We're moving from asking about the vendor to asking about the implementation.</p>
+      </div>
+
+      <div class="section-heading">
+        <span class="eyebrow">The Contextual Trust Framework</span>
+        <h2 class="heading-l">Five dimensions determine Implementation Trust</h2>
+        <p class="dek">There is no universal vendor risk score. There is only implementation-specific trust — built from five questions, not one.</p>
+      </div>
+
+      <div class="framework-table" role="table" aria-label="The Contextual Trust Framework">
+        <div class="framework-row" role="row">
+          <div class="dim" role="columnheader">Vendor</div>
+          <div class="question" role="cell">Who provides the technology?</div>
+        </div>
+        <div class="framework-row" role="row">
+          <div class="dim" role="columnheader">Business Context</div>
+          <div class="question" role="cell">Why is it being used?</div>
+        </div>
+        <div class="framework-row active" role="row">
+          <div class="dim" role="columnheader">Data Sensitivity</div>
+          <div class="question" role="cell">What information can it access?</div>
+        </div>
+        <div class="framework-row" role="row">
+          <div class="dim" role="columnheader">Granted Capabilities</div>
+          <div class="question" role="cell">What actions can it perform?</div>
+        </div>
+        <div class="framework-row" role="row">
+          <div class="dim" role="columnheader">Required Security Controls</div>
+          <div class="question" role="cell">Which controls are necessary for this implementation?</div>
+        </div>
+      </div>
+
+      <p class="framework-footer"><strong>Together, these dimensions replace the vendor risk score.</strong> The same vendor can represent minimal risk in one implementation and critical risk in another — not because the vendor changed, but because everything around it did.</p>
+    </section>
+
+    <!-- ========================= WHY TPRM DOESN'T SCALE ========================= -->
+    <section class="beat reveal" data-section="Why Traditional TPRM Doesn't Scale" id="doesnt-scale">
+      <div class="section-heading">
+        <span class="eyebrow">Why Traditional TPRM Doesn't Scale</span>
+        <h2 class="heading-l">Trust can no longer be a point-in-time decision</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">The challenge isn't a shortage of talented analysts. It's that the operating model assumes trust can be assessed periodically — and AI changes too quickly for that assumption to hold.</p>
+        <p>Business priorities evolve. Implementations expand. Permissions accumulate. Models gain new capabilities. Data flows change.</p>
+        <div class="quote-tier2">Adding more analysts simply scales yesterday's operating model. It does not solve tomorrow's problem.</div>
+      </div>
+    </section>
+
+    <!-- ========================= FROM ASSESSMENT TO CONTEXT ========================= -->
+    <section class="beat reveal" data-section="From Vendor Assessment to Context Assessment" id="from-to">
+      <div class="section-heading">
+        <span class="eyebrow">From Vendor Assessment to Context Assessment</span>
+        <h2 class="heading-l">This is where AI can redesign TPRM itself</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">Not because AI completes questionnaires faster — but because it can continuously understand context. It can correlate evidence, monitor implementation changes, identify control gaps, recognize shifts in business usage, and surface emerging risks.</p>
+        <div class="callout">
+          <span class="utility">Note</span>
+          <p>AI enables organizations to evaluate trust continuously, not periodically. That's a more meaningful transformation than simply automating assessments.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= WHERE HUMAN JUDGMENT MATTERS ========================= -->
+    <section class="beat reveal" data-section="Where Human Judgment Matters Most" id="judgment">
+      <div class="section-heading">
+        <span class="eyebrow">Where Human Judgment Matters Most</span>
+        <h2 class="heading-l">None of this reduces the importance of security professionals. It increases it.</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">Machines are exceptionally good at gathering evidence, detecting change, correlating information, and identifying inconsistencies. Humans remain responsible for what matters most: making trade-offs, balancing business objectives against security risk, designing compensating controls, accepting risk, and building organizational trust.</p>
+        <div class="quote-tier2">The role of the TPRM professional evolves from evidence collection to strategic decision-making.</div>
+      </div>
+    </section>
+
+    <!-- ========================= STRATEGIC IMPLICATIONS ========================= -->
+    <section class="beat reveal" data-section="Continuous Trust" id="continuous-trust">
+      <div class="section-heading">
+        <span class="eyebrow">Strategic Implications — Continuous Trust</span>
+        <h2 class="heading-l">Two questions replace the annual assessment</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">Future operating models should continuously answer two simple questions: Has the vendor changed? Has our implementation changed? Either answer may change the organization's risk.</p>
+        <p>Trust is no longer static. Neither is TPRM.</p>
+      </div>
+    </section>
+
+    <!-- ========================= PRACTICAL RECOMMENDATIONS ========================= -->
+    <section class="beat reveal" data-section="The Real Transformation" id="recommendations">
+      <div class="section-heading">
+        <span class="eyebrow">Practical Recommendations — The Real Transformation</span>
+        <h2 class="heading-l">Don't automate yesterday's process. Redesign the operating model.</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">For more than two decades, TPRM has treated the vendor as the unit of trust. Today, the implementation becomes the unit of trust — and that single shift changes how we assess technology, design security controls, prioritize risk, allocate security resources, and ultimately, enable innovation.</p>
+      </div>
+    </section>
+
+    <!-- ============================ CONCLUSION ============================ -->
+    <section class="beat reveal" data-section="Conclusion" id="conclusion">
+      <div class="axis-wrap">
+        <div class="axis-line"><div class="axis-marker" style="left:var(--axis-pos, 96%); background:var(--axis-color, var(--signal-warm));"></div></div>
+        <div class="axis-labels"><span>Vendor-centric</span><span>Context-centric</span></div>
+        <p class="axis-caption">The question has fully shifted: from the vendor to the implementation.</p>
+      </div>
+      <p class="lead" style="margin-top: var(--sp-4);">The future of TPRM is not a faster questionnaire. It is a continuously operating trust engine — where intelligent systems provide evidence and context, and humans apply judgment where it matters most.</p>
+      <p class="display" style="font-size: clamp(26px, 4vw, 38px); margin-top: var(--sp-4); font-weight: 700; letter-spacing: -0.015em; line-height: 1.25;">Because in the AI era, the question is no longer "Can we trust this vendor?" It is "Can we trust this implementation?"</p>
+    </section>
+
+    <!-- ========================= QUESTIONS FOR LEADERS ========================= -->
+    <section class="beat reveal" data-section="Questions for Leaders" id="questions">
+      <div class="section-heading">
+        <span class="eyebrow">Questions for Leaders</span>
+        <h2 class="heading-l">Sit with these before your next vendor review</h2>
+      </div>
+      <ol class="questions-list">
+        <li>When did we last evaluate an AI implementation rather than the vendor behind it?</li>
+        <li>Do we know what data, capabilities, and controls are actually present in each deployment — today, not at approval time?</li>
+        <li>Is our TPRM operating model built for a point-in-time decision, or a continuously changing condition?</li>
+      </ol>
+    </section>
+
+    <!-- ============================ AUTHOR BIO ============================ -->
+    <section class="beat author-bio reveal" id="author" aria-label="About the author">
+      <div class="name">Amiel Attias</div>
+      <p class="cred">Amiel Attias is a cybersecurity executive and author of the Building Trust in the AI Era editorial series, exploring how AI is reshaping security, governance, and enterprise trust.</p>
+      <p class="disclaimer">Views expressed are my own and based on my professional experience. They do not represent the views or practices of my current or former employers.</p>
+    </section>
+
+  </div>
+
+  <footer class="page-footer container">
+    <div class="footer-actions no-print">
+      <button class="btn" id="printBtn">Export as PDF</button>
+      <button class="btn" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">Back to top</button>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Theme toggle ---------- */
+  var themeBtn = document.getElementById('themeBtn');
+  var root = document.documentElement;
+  function setTheme(t) { root.setAttribute('data-theme', t); window.__theme = t; }
+  themeBtn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+  });
+
+  /* ---------- Reading progress + scroll-driven axis ---------- */
+  var fill = document.getElementById('progressFill');
+  var article = document.getElementById('main');
+  var markers = document.querySelectorAll('.axis-marker');
+
+  function lerpColor(a, b, t) {
+    // simple hex lerp for the cold->warm signal transition
+    function hex2rgb(h) { h = h.replace('#',''); return [parseInt(h.substr(0,2),16), parseInt(h.substr(2,2),16), parseInt(h.substr(4,2),16)]; }
+    var c1 = hex2rgb(a), c2 = hex2rgb(b);
+    var r = Math.round(c1[0] + (c2[0]-c1[0]) * t);
+    var g = Math.round(c1[1] + (c2[1]-c1[1]) * t);
+    var bl = Math.round(c1[2] + (c2[2]-c1[2]) * t);
+    return 'rgb(' + r + ',' + g + ',' + bl + ')';
+  }
+
+  var COLD = '#33469C', WARM = '#E07A3F';
+
+  function onScroll() {
+    var rect = article.getBoundingClientRect();
+    var total = article.scrollHeight - window.innerHeight;
+    var scrolled = Math.min(Math.max(-rect.top, 0), total);
+    var progress = total > 0 ? scrolled / total : 0;
+
+    fill.style.width = (progress * 100) + '%';
+
+    var pos = 4 + progress * 92; // 4% to 96%
+    var color = lerpColor(COLD, WARM, progress);
+    document.documentElement.style.setProperty('--axis-pos', pos + '%');
+    document.documentElement.style.setProperty('--axis-color', color);
+  }
+
+  if (reduceMotion) {
+    // Snap rather than continuously animate for reduced-motion users
+    onScroll();
+  } else {
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () { onScroll(); ticking = false; });
+        ticking = true;
+      }
+    }, { passive: true });
+    onScroll();
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- PDF export via native print ---------- */
+  document.getElementById('printBtn').addEventListener('click', function () { window.print(); });
+
+  /* ---------- Search (Cmd/Ctrl+K) ----------
+     Indexes this article's sections by data-section attribute.
+     Scaling note: for a multi-article site, this same index shape
+     ({title, section, url, excerpt}) is what a static search-index.json
+     built at publish time would feed into. */
+  var sections = Array.prototype.map.call(document.querySelectorAll('[data-section]'), function (el) {
+    return { title: el.getAttribute('data-section'), id: el.id, excerpt: (el.querySelector('p') || {}).textContent || '' };
+  });
+
+  var overlay = document.getElementById('searchOverlay');
+  var input = document.getElementById('searchInput');
+  var results = document.getElementById('searchResults');
+
+  function openSearch() { overlay.classList.add('open'); input.value = ''; renderResults(''); input.focus(); }
+  function closeSearch() { overlay.classList.remove('open'); }
+
+  function renderResults(q) {
+    q = q.trim().toLowerCase();
+    var matches = !q ? sections : sections.filter(function (s) {
+      return s.title.toLowerCase().indexOf(q) !== -1 || s.excerpt.toLowerCase().indexOf(q) !== -1;
+    });
+    results.innerHTML = '';
+    if (!matches.length) {
+      results.innerHTML = '<div class="search-empty">No sections match "' + q + '".</div>';
+      return;
+    }
+    matches.forEach(function (m) {
+      var btn = document.createElement('button');
+      btn.className = 'search-result';
+      btn.innerHTML = '<div class="r-section">' + m.title + '</div>' + (m.excerpt.slice(0,90) || '');
+      btn.addEventListener('click', function () {
+        closeSearch();
+        document.getElementById(m.id).scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      });
+      results.appendChild(btn);
+    });
+  }
+
+  document.getElementById('searchBtn').addEventListener('click', openSearch);
+  input.addEventListener('input', function () { renderResults(input.value); });
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeSearch(); });
+
+  document.addEventListener('keydown', function (e) {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openSearch(); }
+    if (e.key === 'Escape') closeSearch();
+  });
+})();
+</script>
+
+</body>
+</html>
