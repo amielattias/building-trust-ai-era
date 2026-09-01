@@ -66,7 +66,7 @@
 
   /* Spacing (8px base unit) */
   --sp-1: 8px;  --sp-2: 16px; --sp-3: 24px; --sp-4: 32px;
-  --sp-6: 48px; --sp-8: 64px; --sp-12: 96px;
+  --sp-6: 48px; --sp-8: 56px; --sp-12: 72px;
 
   --measure: 680px;
   --wide: 900px;
@@ -201,7 +201,7 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
 .section-heading p.dek { margin-top: var(--sp-2); max-width: 60ch; }
 
 @media (max-width: 640px) {
-  section.beat { padding-top: var(--sp-8); }
+  section.beat { padding-top: 40px; }
   .section-heading { margin-bottom: var(--sp-3); }
 }
 
@@ -296,7 +296,7 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
 /* ==========================================================================
    BODY CONTENT RHYTHM
    ========================================================================== */
-.prose > * + * { margin-top: var(--sp-3); }
+.prose > * + * { margin-top: 18px; }
 .prose ul { padding-left: 1.2em; }
 .prose li + li { margin-top: 8px; }
 
@@ -365,6 +365,10 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
 .search-result .r-section { font-size: 11px; color: var(--graphite); text-transform: uppercase; letter-spacing: 0.06em; }
 .search-empty { padding: var(--sp-3); color: var(--graphite); font-size: 14px; }
 
+.series-nav { margin-bottom: var(--sp-3); }
+.series-nav a { text-decoration: none; }
+.series-nav a:hover { text-decoration: underline; }
+
 /* ==========================================================================
    REVEAL ANIMATION — one orchestrated moment, not scattered effects
    ========================================================================== */
@@ -416,6 +420,7 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
 
   <!-- ============================== COVER ============================== -->
   <section class="cover container" id="top">
+    <div class="series-nav utility"><a href="editorial-2.html">Editorial #2: From Periodic Assessment to Continuous Trust →</a></div>
     <h1 class="display">TPRM Must Change<br>for the AI Era</h1>
     <p class="dek">Trust the vendor, reduce the risk — that assumption built Third-Party Risk Management for the software era. It no longer holds.</p>
 
@@ -603,6 +608,7 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
   </div>
 
   <footer class="page-footer container">
+    <div class="series-nav utility no-print" style="margin-bottom: var(--sp-2);"><a href="editorial-2.html">Read Editorial #2: From Periodic Assessment to Continuous Trust →</a></div>
     <div class="footer-actions no-print">
       <button class="btn" id="printBtn">Export as PDF</button>
       <button class="btn" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">Back to top</button>
