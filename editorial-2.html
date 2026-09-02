@@ -370,6 +370,58 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
 .series-nav a:hover { text-decoration: underline; }
 
 /* ==========================================================================
+   LOOP CIRCLE — native cycle diagram, same tokens as everything else.
+   No shadows, no gradients, no drop-in illustration. Desktop/tablet only;
+   a 6-node circle doesn't reflow cleanly on a phone, so the loop-strip
+   below serves as its mobile-width equivalent.
+   ========================================================================== */
+.loop-circle {
+  position: relative; width: 100%; max-width: 560px; aspect-ratio: 1 / 1;
+  margin: var(--sp-4) auto var(--sp-2);
+}
+.loop-circle-line { position: absolute; inset: 0; width: 100%; height: 100%; }
+.loop-circle-line circle { fill: none; stroke: var(--hairline); stroke-width: 0.6; }
+
+.loop-hub {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 34%; aspect-ratio: 1 / 1; border-radius: 50%;
+  border: 1px solid var(--hairline); background: var(--mist);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 4px;
+}
+.loop-hub .h1 { font-size: clamp(10px, 3.4vw, 16px); font-weight: 700; letter-spacing: -0.01em; line-height: 1.15; }
+.loop-hub .h2 { font-size: clamp(7px, 1.8vw, 10px); color: var(--graphite); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 3px; }
+
+.loop-node {
+  position: absolute; transform: translate(-50%, -50%);
+  width: clamp(50px, 20vw, 100px); text-align: center;
+}
+.loop-node .num { display: block; color: var(--signal-cold); font-size: clamp(8px, 2vw, 11px); font-weight: 700; letter-spacing: 0.06em; }
+.loop-node .label { font-size: clamp(10px, 3vw, 14px); font-weight: 600; letter-spacing: -0.005em; line-height: 1.15; }
+
+.loop-arrow-mark { position: absolute; color: var(--graphite); font-size: clamp(10px, 2.4vw, 13px); }
+
+.loop-return-caption { text-align: center; font-size: 13px; color: var(--graphite); margin-bottom: var(--sp-4); }
+
+/* ==========================================================================
+   LOOP STRIP — retained as an ultra-narrow-screen safety net only (under
+   ~340px), where even fluid-scaled circle text would start crowding.
+   ========================================================================== */
+.loop-strip { display: none; flex-wrap: wrap; align-items: center; gap: 6px; margin: var(--sp-3) 0 var(--sp-4); }
+@media (max-width: 340px) {
+  .loop-circle { display: none; }
+  .loop-strip { display: flex; }
+}
+.loop-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid var(--hairline); border-radius: 20px;
+  padding: 6px 14px; font-size: 13px; font-weight: 500; white-space: nowrap;
+}
+.loop-chip .num { color: var(--signal-cold); font-weight: 700; font-size: 11px; }
+.loop-arrow { color: var(--graphite); font-size: 14px; }
+.loop-return { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--graphite); margin-top: 4px; width: 100%; }
+
+/* ==========================================================================
    LIGHTWEIGHT SUPPORTING TABLE - for signals/checklists that support the
    framework but shouldn't compete with it visually. One framework gets full
    treatment per article; everything else stays quieter than that.
@@ -491,6 +543,44 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
         <span class="eyebrow">The Continuous Trust Loop</span>
         <h2 class="heading-l">Six moves replace the old assess-once cycle</h2>
         <p class="dek">Not every change should trigger reassessment. The Loop exists to answer one question continuously: does our trust decision still hold?</p>
+      </div>
+
+      <div class="loop-circle" aria-hidden="true">
+        <svg class="loop-circle-line" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <circle cx="50" cy="50" r="38"></circle>
+        </svg>
+        <div class="loop-hub">
+          <span class="h1">Continuous Trust</span>
+          <span class="h2">Decision Loop</span>
+        </div>
+        <div class="loop-node" style="left:50%; top:12%;"><span class="num">01</span><span class="label">Assess</span></div>
+        <div class="loop-node" style="left:82.9%; top:31%;"><span class="num">02</span><span class="label">Approve</span></div>
+        <div class="loop-node" style="left:82.9%; top:69%;"><span class="num">03</span><span class="label">Observe</span></div>
+        <div class="loop-node" style="left:50%; top:88%;"><span class="num">04</span><span class="label">Detect</span></div>
+        <div class="loop-node" style="left:17.1%; top:69%;"><span class="num">05</span><span class="label">Reassess</span></div>
+        <div class="loop-node" style="left:17.1%; top:31%;"><span class="num">06</span><span class="label">Adapt</span></div>
+        <span class="loop-arrow-mark" style="left:69%; top:17.1%; transform:translate(-50%,-50%) rotate(135deg);">→</span>
+        <span class="loop-arrow-mark" style="left:88%; top:50%; transform:translate(-50%,-50%) rotate(195deg);">→</span>
+        <span class="loop-arrow-mark" style="left:69%; top:82.9%; transform:translate(-50%,-50%) rotate(255deg);">→</span>
+        <span class="loop-arrow-mark" style="left:31%; top:82.9%; transform:translate(-50%,-50%) rotate(315deg);">→</span>
+        <span class="loop-arrow-mark" style="left:12%; top:50%; transform:translate(-50%,-50%) rotate(15deg);">→</span>
+        <span class="loop-arrow-mark" style="left:31%; top:17.1%; transform:translate(-50%,-50%) rotate(75deg);">→</span>
+      </div>
+      <p class="loop-return-caption">↺ The loop doesn't end at Adapt - it returns to Assess.</p>
+
+      <div class="loop-strip" aria-hidden="true">
+        <span class="loop-chip"><span class="num">01</span>Assess</span>
+        <span class="loop-arrow">→</span>
+        <span class="loop-chip"><span class="num">02</span>Approve</span>
+        <span class="loop-arrow">→</span>
+        <span class="loop-chip"><span class="num">03</span>Observe</span>
+        <span class="loop-arrow">→</span>
+        <span class="loop-chip"><span class="num">04</span>Detect</span>
+        <span class="loop-arrow">→</span>
+        <span class="loop-chip"><span class="num">05</span>Reassess</span>
+        <span class="loop-arrow">→</span>
+        <span class="loop-chip"><span class="num">06</span>Adapt</span>
+        <span class="loop-return">↺ back to Assess - this doesn't end, it cycles</span>
       </div>
 
       <div class="framework-table" role="table" aria-label="The Continuous Trust Loop">
