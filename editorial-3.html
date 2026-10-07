@@ -3,28 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>TPRM Must Change for the AI Era | Building Trust in the AI Era</title>
-<meta name="description" content="Third-Party Risk Management was built on trusting the vendor. In the AI era, the implementation — not the vendor — becomes the unit of trust. By Amiel Attias.">
+<title>When AI Starts Acting: The New Runtime Trust Problem | Building Trust in the AI Era</title>
+<meta name="description" content="An AI agent can hold valid permissions, operate inside an approved implementation, and still take an action that should never be allowed. Editorial #3 introduces Action Trust, and why identity anchors it. By Amiel Attias.">
 
 <!-- SEO / Open Graph -->
 <meta property="og:type" content="article">
-<meta property="og:title" content="TPRM Must Change for the AI Era">
-<meta property="og:description" content="The implementation becomes the unit of trust. A new framework for evaluating AI risk in the enterprise.">
+<meta property="og:title" content="When AI Starts Acting: The New Runtime Trust Problem">
+<meta property="og:description" content="The new trust boundary is no longer just the system or the identity. It is the action - in context.">
 <meta property="og:site_name" content="Building Trust in the AI Era">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="TPRM Must Change for the AI Era">
-<meta name="twitter:description" content="Third-Party Risk Management was built on trusting the vendor. In the AI era, the implementation becomes the unit of trust.">
-<link rel="canonical" href="https://example.com/editorials/tprm-must-change-for-the-ai-era">
+<meta name="twitter:title" content="When AI Starts Acting: The New Runtime Trust Problem">
+<meta name="twitter:description" content="The permission may be valid. The implementation may be approved. The action may still be wrong.">
+<link rel="canonical" href="https://example.com/editorials/when-ai-starts-acting-the-new-runtime-trust-problem">
 
 <!-- Structured data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "TPRM Must Change for the AI Era",
+  "headline": "When AI Starts Acting: The New Runtime Trust Problem",
   "author": { "@type": "Person", "name": "Amiel Attias" },
   "publisher": { "@type": "Organization", "name": "Building Trust in the AI Era" },
-  "description": "Third-Party Risk Management was built on trusting the vendor. In the AI era, the implementation becomes the unit of trust.",
+  "description": "The new trust boundary is no longer just the system or the identity. It is the action - in context.",
   "articleSection": "AI Governance",
   "inLanguage": "en"
 }
@@ -46,7 +46,7 @@
 
 <style>
 /* ==========================================================================
-   BUILDING TRUST IN THE AI ERA — DESIGN SYSTEM TOKENS
+   BUILDING TRUST IN THE AI ERA - DESIGN SYSTEM TOKENS
    ========================================================================== */
 :root {
   /* Light theme */
@@ -56,7 +56,7 @@
   --hairline: #E4E5E7;
   --mist: #F7F8F9;
 
-  /* Signature accent — no longer a single static hex.
+  /* Signature accent - no longer a single static hex.
      The signal interpolates between a cold, structural blue (vendor-centric,
      fixed, rule-bound) and a warm ember (context-centric, adaptive, human).
      This *is* the essay's argument, expressed as color, not decoration. */
@@ -130,7 +130,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 }
 
 /* ==========================================================================
-   HEADER — persistent, minimal, axis-mark as wordmark
+   HEADER - persistent, minimal, axis-mark as wordmark
    ========================================================================== */
 .site-header {
   position: sticky; top: 0; z-index: 100;
@@ -220,7 +220,7 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
 .cover-meta .byline { font-size: 13px; color: var(--graphite); }
 
 /* ==========================================================================
-   AXIS — the signature element. Scroll-driven, not a fixed 3-beat graphic.
+   AXIS - the signature element. Scroll-driven, not a fixed 3-beat graphic.
    ========================================================================== */
 .axis-line { position: relative; height: 1px; background: var(--hairline); width: 100%; margin-bottom: 10px; }
 .axis-marker {
@@ -244,7 +244,7 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
 .exec-summary p { font-size: 18px; line-height: 1.6; }
 
 /* ==========================================================================
-   QUOTES — two tiers only
+   QUOTES - two tiers only
    ========================================================================== */
 .quote-tier1 {
   background: var(--mist); border-radius: var(--radius);
@@ -262,7 +262,7 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
 }
 
 /* ==========================================================================
-   CALLOUT — one type only
+   CALLOUT - one type only
    ========================================================================== */
 .callout {
   border-left: 2px solid var(--hairline); padding: var(--sp-2) 0 var(--sp-2) var(--sp-2);
@@ -339,7 +339,7 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
 .btn:hover { border-color: var(--signal-cold); }
 
 /* ==========================================================================
-   SEARCH (Cmd/Ctrl+K) — architected to scale to a multi-article index
+   SEARCH (Cmd/Ctrl+K) - architected to scale to a multi-article index
    ========================================================================== */
 .search-overlay {
   position: fixed; inset: 0; background: color-mix(in srgb, var(--ink) 40%, transparent);
@@ -371,8 +371,14 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
 .series-nav a:hover { text-decoration: underline; }
 
 /* ==========================================================================
-   REVEAL ANIMATION — one orchestrated moment, not scattered effects
+   LIGHTWEIGHT SUPPORTING TABLE - for signals/checklists that support the
+   framework but shouldn't compete with it visually. One framework gets full
+   treatment per article; everything else stays quieter than that.
    ========================================================================== */
+.signal-list { border-top: 1px solid var(--hairline); margin-top: var(--sp-3); }
+.signal-item { padding: var(--sp-2) 0; border-bottom: 1px solid var(--hairline); }
+.signal-item .q { font-weight: 600; font-size: 15px; }
+.signal-item .a { font-size: 15px; color: var(--graphite); margin-top: 4px; }
 .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
 .reveal.in { opacity: 1; transform: translateY(0); }
 
@@ -398,7 +404,7 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
 
 <header class="site-header">
   <div class="inner">
-    <a class="brand" href="#top" aria-label="Building Trust in the AI Era — home">
+    <a class="brand" href="#top" aria-label="Building Trust in the AI Era - home">
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-name">Building Trust in the AI Era</span>
     </a>
@@ -421,18 +427,18 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
 
   <!-- ============================== COVER ============================== -->
   <section class="cover container" id="top">
-    <div class="series-nav utility"><a href="editorial-2.html">Editorial #2: From Periodic Assessment to Continuous Trust →</a></div>
-    <h1 class="display">TPRM Must Change<br>for the AI Era</h1>
-    <p class="dek">Trust the vendor, reduce the risk — that assumption built Third-Party Risk Management for the software era. It no longer holds.</p>
+    <div class="series-nav utility"><a href="editorial-2.html">← Editorial #2: From Periodic Assessment to Continuous Trust</a></div>
+    <h1 class="display">When AI Starts Acting:<br>The New Runtime Trust Problem</h1>
+    <p class="dek">From trusting the implementation to trusting the action.</p>
 
     <div class="axis-wrap">
       <div class="axis-line"><div class="axis-marker" id="axisMarker"></div></div>
-      <div class="axis-labels"><span>Vendor-centric</span><span>Context-centric</span></div>
+      <div class="axis-labels"><span>Access-centric</span><span>Action-centric</span></div>
     </div>
 
     <div class="cover-meta">
-      <div class="headline">TPRM Must Change for the AI Era</div>
-      <div class="byline">By Amiel Attias</div>
+      <div class="headline">When AI Starts Acting: The New Runtime Trust Problem</div>
+      <div class="byline">By Amiel Attias · Editorial #3</div>
     </div>
   </section>
 
@@ -441,137 +447,135 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
     <!-- ========================= EXECUTIVE SUMMARY ========================= -->
     <section class="exec-summary reveal" data-section="Executive Summary" id="exec-summary">
       <span class="utility">In Brief</span>
-      <p>For decades, Third-Party Risk Management assumed that trusting the vendor reduced the risk. AI breaks that assumption: the same platform can be deployed to summarize public content or connected to proprietary code and privileged systems — same vendor, radically different risk. The implementation, not the vendor, is now the real unit of trust. This piece introduces the Contextual Trust Framework, five questions that replace a single vendor risk score, and argues that trust must be evaluated continuously rather than assessed once and left alone.</p>
+      <p>Editorials #1 and #2 made the implementation the unit of trust, then made that trust continuous. This piece goes one level down, to the individual action. An agent can hold valid permissions, run inside an approved implementation, and still do something that should never be allowed. Deciding whether to trust that action starts with identity.</p>
     </section>
 
-    <!-- ========================= PROBLEM STATEMENT ========================= -->
-    <section class="beat reveal" data-section="The Business Problem Isn't AI" id="problem">
+    <!-- ========================= THE PERMISSION PARADOX ========================= -->
+    <section class="beat reveal" data-section="The Permission Paradox" id="problem">
       <div class="section-heading">
-        <span class="eyebrow">The Business Problem Isn't AI</span>
-        <h2 class="heading-l">Security was built to move in weeks. AI moves in days.</h2>
+        <span class="eyebrow">The Permission Paradox</span>
+        <h2 class="heading-l">A valid permission no longer means a trustworthy action</h2>
       </div>
       <div class="prose">
-        <p class="lead">Every executive faces the same tension: the business wants AI deployed in days, while security was designed to evaluate technology over weeks. That gap is quickly becoming one of the biggest operational risks facing modern enterprises.</p>
-        <p>The challenge isn't simply approving AI faster. It's enabling innovation without losing confidence in how technology is adopted. That means changing the question itself — not <em>"Is this vendor secure?"</em> but <em>"Can we trust this implementation?"</em> That is a fundamentally different question, and it demands a fundamentally different operating model.</p>
-      </div>
-    </section>
-
-    <!-- ========================= NEW MENTAL MODEL ========================= -->
-    <section class="beat reveal" data-section="The Unit of Trust Has Changed" id="mental-model">
-      <div class="section-heading">
-        <span class="eyebrow">The Unit of Trust Has Changed</span>
-        <h2 class="heading-l">Traditional TPRM treats the vendor as the unit of analysis. That no longer reflects how organizations consume AI.</h2>
-      </div>
-      <div class="prose">
-        <p class="lead">Risk is no longer determined primarily by who provides the technology. It emerges from the relationship between the technology and the business using it. The same vendor may represent minimal risk in one implementation and critical risk in another — not because the vendor changed, but because everything around it did.</p>
+        <p class="lead">A coding agent editing application code is one thing. Editing the CI/CD pipeline and disabling a security control is something else. A CRM agent reading a customer record is one thing. Exporting 50,000 of them to an external destination is something else.</p>
+        <p>Permission tells you what an identity can do. It doesn't tell you what it should do right now.</p>
       </div>
     </section>
 
     <div class="quote-tier1 reveal">
-      <p>The implementation becomes the unit of trust.</p>
-      <div class="attribution utility">The Unit of Trust Has Changed</div>
+      <p>The permission may be valid. The implementation may be approved. The action may still be wrong.</p>
+      <div class="attribution utility">The Permission Paradox</div>
     </div>
 
+    <!-- ========================= WHY IDENTITY ========================= -->
+    <section class="beat reveal" data-section="Why Identity Anchors Runtime Trust" id="identity">
+      <div class="section-heading">
+        <span class="eyebrow">Why Identity Anchors Runtime Trust</span>
+        <h2 class="heading-l">Identity is the one thing present in every action</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">Networks, applications and data stores each see a slice of what an agent does. Identity sees all of it, because every action in every system is performed by an identity. In my view that makes identity the natural anchor for runtime trust, for three reasons.</p>
+      </div>
+      <div class="signal-list">
+        <div class="signal-item">
+          <div class="q">It gives the action an owner</div>
+          <div class="a">Which agent acted, on whose behalf, and who answers for it.</div>
+        </div>
+        <div class="signal-item">
+          <div class="q">It carries the purpose</div>
+          <div class="a">An identity is created for a reason. That purpose is the baseline every action is judged against.</div>
+        </div>
+        <div class="signal-item">
+          <div class="q">It is where the decision takes effect</div>
+          <div class="a">Step-up approval, narrower scope, just-in-time privilege and revocation are all identity controls.</div>
+        </div>
+      </div>
+      <div class="prose" style="margin-top: var(--sp-3);">
+        <p>So the classic identity question gains a second half. Not only "is this identity allowed to act?" but "should this action be trusted, in this context, for this identity?"</p>
+        <div class="quote-tier2">Runtime trust requires an independently attributable identity. If an agent borrows a human or shared service identity, you lose the ability to determine who actually performed the action - and therefore the ability to make meaningful, context-aware trust decisions.</div>
+      </div>
+    </section>
+
     <!-- ============================ FRAMEWORK ============================ -->
-    <section class="beat reveal" data-section="The Contextual Trust Framework" id="framework">
+    <section class="beat reveal" data-section="The Action Trust Framework" id="framework">
       <div class="axis-wrap">
         <div class="axis-line"><div class="axis-marker" style="left:var(--axis-pos, 50%); background:var(--axis-color, var(--signal-cold));"></div></div>
-        <div class="axis-labels"><span>Vendor-centric</span><span>Context-centric</span></div>
-        <p class="axis-caption" id="axisCaption">We're moving from asking about the vendor to asking about the implementation.</p>
+        <div class="axis-labels"><span>Access-centric</span><span>Action-centric</span></div>
+        <p class="axis-caption" id="axisCaption">We're moving from asking what an identity can access to asking what it's doing, right now.</p>
       </div>
 
       <div class="section-heading">
-        <span class="eyebrow">The Contextual Trust Framework</span>
-        <h2 class="heading-l">Five dimensions determine Implementation Trust</h2>
-        <p class="dek">There is no universal vendor risk score. There is only implementation-specific trust — built from five questions, not one.</p>
+        <span class="eyebrow">The Action Trust Framework</span>
+        <h2 class="heading-l">Six steps turn runtime behavior into a trust decision</h2>
       </div>
 
-      <div class="framework-table" role="table" aria-label="The Contextual Trust Framework">
+      <div class="framework-table" role="table" aria-label="The Action Trust Framework">
         <div class="framework-row" role="row">
-          <div class="dim" role="columnheader">Vendor</div>
-          <div class="question" role="cell">Who provides the technology?</div>
+          <div class="dim" role="columnheader">Observe</div>
+          <div class="question" role="cell">Capture the action and the signals around it.</div>
         </div>
         <div class="framework-row" role="row">
-          <div class="dim" role="columnheader">Business Context</div>
-          <div class="question" role="cell">Why is it being used?</div>
+          <div class="dim" role="columnheader">Understand</div>
+          <div class="question" role="cell">Which identity is acting, doing what, with which data, where, and why?</div>
         </div>
         <div class="framework-row active" role="row">
-          <div class="dim" role="columnheader">Data Sensitivity</div>
-          <div class="question" role="cell">What information can it access?</div>
+          <div class="dim" role="columnheader">Assess</div>
+          <div class="question" role="cell">Does this action fit the identity's purpose, or materially change the risk?</div>
         </div>
         <div class="framework-row" role="row">
-          <div class="dim" role="columnheader">Granted Capabilities</div>
-          <div class="question" role="cell">What actions can it perform?</div>
+          <div class="dim" role="columnheader">Decide</div>
+          <div class="question" role="cell">Allow, monitor, add controls, require human approval, or block.</div>
         </div>
         <div class="framework-row" role="row">
-          <div class="dim" role="columnheader">Required Security Controls</div>
-          <div class="question" role="cell">Which controls are necessary for this implementation?</div>
+          <div class="dim" role="columnheader">Control</div>
+          <div class="question" role="cell">Enforce the decision through the identity.</div>
+        </div>
+        <div class="framework-row" role="row">
+          <div class="dim" role="columnheader">Record</div>
+          <div class="question" role="cell">Keep the decision and evidence for audit and learning.</div>
         </div>
       </div>
 
-      <p class="framework-footer"><strong>Together, these dimensions replace the vendor risk score.</strong> The same vendor can represent minimal risk in one implementation and critical risk in another — not because the vendor changed, but because everything around it did.</p>
+      <p class="framework-footer"><strong>Unusual isn't the same as risky.</strong> Context is what separates an unusual action from a risk-significant one. Without it, every anomaly becomes an alert and every agent gets blocked.</p>
     </section>
 
-    <!-- ========================= WHY TPRM DOESN'T SCALE ========================= -->
-    <section class="beat reveal" data-section="Why Traditional TPRM Doesn't Scale" id="doesnt-scale">
+    <!-- ========================= THREE EXAMPLES ========================= -->
+    <section class="beat reveal" data-section="Three Examples" id="examples">
       <div class="section-heading">
-        <span class="eyebrow">Why Traditional TPRM Doesn't Scale</span>
-        <h2 class="heading-l">Trust can no longer be a point-in-time decision</h2>
+        <span class="eyebrow">Three Examples</span>
+        <h2 class="heading-l">Same identity. Different action.</h2>
       </div>
-      <div class="prose">
-        <p class="lead">The challenge isn't a shortage of talented analysts. It's that the operating model assumes trust can be assessed periodically — and AI changes too quickly for that assumption to hold.</p>
-        <p>Business priorities evolve. Implementations expand. Permissions accumulate. Models gain new capabilities. Data flows change.</p>
-        <div class="quote-tier2">Adding more analysts simply scales yesterday's operating model. It does not solve tomorrow's problem.</div>
-      </div>
-    </section>
 
-    <!-- ========================= FROM ASSESSMENT TO CONTEXT ========================= -->
-    <section class="beat reveal" data-section="From Vendor Assessment to Context Assessment" id="from-to">
-      <div class="section-heading">
-        <span class="eyebrow">From Vendor Assessment to Context Assessment</span>
-        <h2 class="heading-l">This is where AI can redesign TPRM itself</h2>
-      </div>
-      <div class="prose">
-        <p class="lead">Not because AI completes questionnaires faster — but because it can continuously understand context. It can correlate evidence, monitor implementation changes, identify control gaps, recognize shifts in business usage, and surface emerging risks.</p>
-        <div class="callout">
-          <span class="utility">Note</span>
-          <p>AI enables organizations to evaluate trust continuously, not periodically. That's a more meaningful transformation than simply automating assessments.</p>
+      <div class="signal-list">
+        <div class="signal-item">
+          <div class="q">CRM agent</div>
+          <div class="a"><strong>Expected:</strong> reads records, updates tickets. <strong>New action:</strong> exports 50,000 records to an external destination. <strong>Decision:</strong> controls or human approval.</div>
+        </div>
+        <div class="signal-item">
+          <div class="q">HR agent</div>
+          <div class="a"><strong>Expected:</strong> creates standard accounts through an approved workflow. <strong>New action:</strong> creates a privileged admin account with no HR event. <strong>Decision:</strong> block or human approval.</div>
+        </div>
+        <div class="signal-item">
+          <div class="q">Coding agent</div>
+          <div class="a"><strong>Expected:</strong> edits code, opens pull requests. <strong>New action:</strong> modifies the CI/CD pipeline and disables a security control. <strong>Decision:</strong> block or explicit human approval.</div>
         </div>
       </div>
-    </section>
 
-    <!-- ========================= WHERE HUMAN JUDGMENT MATTERS ========================= -->
-    <section class="beat reveal" data-section="Where Human Judgment Matters Most" id="judgment">
-      <div class="section-heading">
-        <span class="eyebrow">Where Human Judgment Matters Most</span>
-        <h2 class="heading-l">None of this reduces the importance of security professionals. It increases it.</h2>
-      </div>
-      <div class="prose">
-        <p class="lead">Machines are exceptionally good at gathering evidence, detecting change, correlating information, and identifying inconsistencies. Humans remain responsible for what matters most: making trade-offs, balancing business objectives against security risk, designing compensating controls, accepting risk, and building organizational trust.</p>
-        <div class="quote-tier2">The role of the TPRM professional evolves from evidence collection to strategic decision-making.</div>
+      <div class="prose" style="margin-top: var(--sp-3);">
+        <div class="quote-tier2">None of these agents broke a technical permission. Each crossed a trust boundary in the nature of the action.</div>
       </div>
     </section>
 
-    <!-- ========================= STRATEGIC IMPLICATIONS ========================= -->
-    <section class="beat reveal" data-section="Continuous Trust" id="continuous-trust">
+    <!-- ========================= START HERE ========================= -->
+    <section class="beat reveal" data-section="Three Things to Do Today" id="start-here">
       <div class="section-heading">
-        <span class="eyebrow">Strategic Implications — Continuous Trust</span>
-        <h2 class="heading-l">Two questions replace the annual assessment</h2>
+        <span class="eyebrow">Three Things to Do Today</span>
+        <h2 class="heading-l">Start with the foundations any runtime tooling will depend on</h2>
       </div>
       <div class="prose">
-        <p class="lead">Future operating models should continuously answer two simple questions: Has the vendor changed? Has our implementation changed? Either answer may change the organization's risk.</p>
-        <p>Trust is no longer static. Neither is TPRM.</p>
-      </div>
-    </section>
-
-    <!-- ========================= PRACTICAL RECOMMENDATIONS ========================= -->
-    <section class="beat reveal" data-section="The Real Transformation" id="recommendations">
-      <div class="section-heading">
-        <span class="eyebrow">Practical Recommendations — The Real Transformation</span>
-        <h2 class="heading-l">Don't automate yesterday's process. Redesign the operating model.</h2>
-      </div>
-      <div class="prose">
-        <p class="lead">For more than two decades, TPRM has treated the vendor as the unit of trust. Today, the implementation becomes the unit of trust — and that single shift changes how we assess technology, design security controls, prioritize risk, allocate security resources, and ultimately, enable innovation.</p>
+        <p class="lead"><strong>1. Give every agent its own identity.</strong> One agent, one identity, one named owner, one stated purpose. No borrowed human credentials, no shared service accounts.</p>
+        <p><strong>2. Inventory actions, not just agents.</strong> Map identity → permission → action → data → system.</p>
+        <p><strong>3. Decide the response before the incident.</strong> Name the risk-significant actions (privilege changes, security-control changes, bulk data movement, external sending, financial transactions) and agree in advance which ones need a human.</p>
       </div>
     </section>
 
@@ -579,23 +583,23 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
     <section class="beat reveal" data-section="Conclusion" id="conclusion">
       <div class="axis-wrap">
         <div class="axis-line"><div class="axis-marker" style="left:var(--axis-pos, 96%); background:var(--axis-color, var(--signal-warm));"></div></div>
-        <div class="axis-labels"><span>Vendor-centric</span><span>Context-centric</span></div>
-        <p class="axis-caption">The question has fully shifted: from the vendor to the implementation.</p>
+        <div class="axis-labels"><span>Access-centric</span><span>Action-centric</span></div>
+        <p class="axis-caption">The question has moved from what an identity can access to what it's doing, right now.</p>
       </div>
-      <p class="lead" style="margin-top: var(--sp-4);">The future of TPRM is not a faster questionnaire. It is a continuously operating trust engine — where intelligent systems provide evidence and context, and humans apply judgment where it matters most.</p>
-      <p class="display" style="font-size: clamp(26px, 4vw, 38px); margin-top: var(--sp-4); font-weight: 700; letter-spacing: -0.015em; line-height: 1.25;">Because in the AI era, the question is no longer "Can we trust this vendor?" It is "Can we trust this implementation?"</p>
+      <p class="lead" style="margin-top: var(--sp-4);">Security has been built around controlling access. AI brings identities that make decisions and take actions across systems, so the question moves from who has access, to what are they doing right now. Existing controls stay. Identity extends into the runtime.</p>
+      <p class="display" style="font-size: clamp(26px, 4vw, 38px); margin-top: var(--sp-4); font-weight: 700; letter-spacing: -0.015em; line-height: 1.25;">The new trust boundary is no longer just the system or the identity. It is the action - in context.</p>
     </section>
 
     <!-- ========================= QUESTIONS FOR LEADERS ========================= -->
     <section class="beat reveal" data-section="Questions for Leaders" id="questions">
       <div class="section-heading">
         <span class="eyebrow">Questions for Leaders</span>
-        <h2 class="heading-l">Sit with these before your next vendor review</h2>
+        <h2 class="heading-l">Sit with these before your next agent deployment review</h2>
       </div>
       <ol class="questions-list">
-        <li>When did we last evaluate an AI implementation rather than the vendor behind it?</li>
-        <li>Do we know what data, capabilities, and controls are actually present in each deployment — today, not at approval time?</li>
-        <li>Is our TPRM operating model built for a point-in-time decision, or a continuously changing condition?</li>
+        <li>Does every AI agent have its own identity, owner and stated purpose - or does it borrow someone else's?</li>
+        <li>Do you know which actions your agents can take, not just which systems they can access?</li>
+        <li>If an agent took an unexpected but permitted action today, would anyone notice before it mattered?</li>
       </ol>
     </section>
 
@@ -609,7 +613,7 @@ section.beat .axis-wrap { margin-bottom: var(--sp-4); }
   </div>
 
   <footer class="page-footer container">
-    <div class="series-nav utility no-print" style="margin-bottom: var(--sp-2);"><a href="editorial-2.html">Read Editorial #2: From Periodic Assessment to Continuous Trust →</a></div>
+    <div class="series-nav utility no-print" style="margin-bottom: var(--sp-2);"><a href="editorial-2.html">← Read Editorial #2: From Periodic Assessment to Continuous Trust</a></div>
     <div class="footer-actions no-print">
       <button class="btn" id="printBtn">Export as PDF</button>
       <button class="btn" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">Back to top</button>

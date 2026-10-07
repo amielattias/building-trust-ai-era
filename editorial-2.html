@@ -208,9 +208,10 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
 /* ==========================================================================
    COVER
    ========================================================================== */
-.cover { padding: var(--sp-8) 0 var(--sp-8); }
+.cover { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
 .cover .dek { margin-top: var(--sp-3); font-size: 19px; color: var(--graphite); max-width: 56ch; }
 .cover .axis-wrap { margin: var(--sp-6) 0 var(--sp-4); }
+section.beat .axis-wrap { margin-bottom: var(--sp-4); }
 .cover-meta {
   border-top: 1px solid var(--hairline); padding-top: var(--sp-3);
   display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--sp-1);
@@ -479,6 +480,7 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
   <!-- ============================== COVER ============================== -->
   <section class="cover container" id="top">
     <div class="series-nav utility"><a href="index.html">← Editorial #1: TPRM Must Change for the AI Era</a></div>
+    <div class="series-nav utility"><a href="editorial-3.html">Editorial #3: When AI Starts Acting →</a></div>
     <h1 class="display">From Periodic Assessment<br>to Continuous Trust</h1>
     <p class="dek">Approval establishes a trust boundary. It does not guarantee that the boundary will remain intact.</p>
 
@@ -703,7 +705,8 @@ section.beat:first-of-type { padding-top: var(--sp-8); }
   </div>
 
   <footer class="page-footer container">
-    <div class="series-nav utility no-print" style="margin-bottom: var(--sp-2);"><a href="index.html">← Read Editorial #1: TPRM Must Change for the AI Era</a></div>
+    <div class="series-nav utility no-print" style="margin-bottom: var(--sp-1);"><a href="index.html">← Read Editorial #1: TPRM Must Change for the AI Era</a></div>
+    <div class="series-nav utility no-print" style="margin-bottom: var(--sp-2);"><a href="editorial-3.html">Read Editorial #3: When AI Starts Acting →</a></div>
     <div class="footer-actions no-print">
       <button class="btn" id="printBtn">Export as PDF</button>
       <button class="btn" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">Back to top</button>
